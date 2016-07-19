@@ -2,7 +2,7 @@ package com.lynas.controller
 
 import com.lynas.model.Organization
 import com.lynas.model.Person
-import com.lynas.repo.OrganizationRepo
+import com.lynas.service.OrganizationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 class HomeController {
 
     @Autowired
-    lateinit var orgRepo: OrganizationRepo
+    lateinit var orgService: OrganizationService
     @RequestMapping(value = "/")
     fun home(): String {
         return "home"
@@ -23,9 +23,13 @@ class HomeController {
 
     @RequestMapping(value = "/save")
     fun save(): String {
-        val person = Person(1, "sazzad")
+        val person = Person()
+        person.name = "Sazzad"
         val listOfPerson = listOf(person)
-        orgRepo.save(Organization(1, "name", 29, listOfPerson))
+        val organization = Organization()
+        organization.name = "orgName"
+        organization.person = listOfPerson
+        orgService.saveOrganization(organization)
         return "home"
     }
 }
