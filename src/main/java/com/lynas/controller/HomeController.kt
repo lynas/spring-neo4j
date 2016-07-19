@@ -42,4 +42,11 @@ class HomeController {
         println(organization.name)
         return "home"
     }
+
+    @RequestMapping(value = "/orgs/{name}")
+    fun readByName(@PathVariable name: String, model: Model): String {
+        val organization = orgService.readByOtherName(name)
+        println(organization.size)
+        return "home"
+    }
 }
