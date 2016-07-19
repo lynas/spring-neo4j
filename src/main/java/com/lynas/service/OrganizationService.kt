@@ -21,4 +21,10 @@ open class OrganizationService {
     open fun saveOrganization(org: Organization) {
         orgRepo.save(org)
     }
+
+
+    @Transactional
+    open fun readByID(id: Long): Organization {
+        return orgRepo.findOne(id)
+    }
 }
