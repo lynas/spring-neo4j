@@ -49,4 +49,13 @@ class HomeController {
         println(organization.size)
         return "home"
     }
+
+
+    @RequestMapping(value = "/org/update")
+    fun update(): String {
+        val organization = orgService.readByID(2)
+        organization.name = "sazName"
+        orgService.saveOrganization(organization)
+        return "home"
+    }
 }
